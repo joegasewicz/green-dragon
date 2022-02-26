@@ -1,2 +1,2 @@
 # Green Dragon
-A really rubbish 2d rpg build with SFML
+A rubbish little 2d rpg built with SFML
