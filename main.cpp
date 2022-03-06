@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "TileMap.h"
 
 
 int main() {
@@ -7,44 +8,29 @@ int main() {
     int screen_height = 256;
     sf::RenderWindow window;
     sf::Texture wizard_texture;
-    sf::Texture grass_texture;
     sf::Sprite wizard_sprite;
-    sf::VertexArray quad(sf::Quads, 4);
-    sf::VertexArray quad2(sf::Quads, 4);
+    TileMap map;
 
+    const int level[] =
+    {
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1, 1, 1, 1,
+      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    };
 
-
-    quad[0].position = sf::Vector2f(0.f, 0.f);
-    quad[1].position = sf::Vector2f(32.f, 0.f);
-    quad[2].position = sf::Vector2f(32.f, 32.f);
-    quad[3].position = sf::Vector2f(0.f, 32.f);
-
-    quad[0].texCoords = sf::Vector2f(32.f, 0.f);
-    quad[1].texCoords = sf::Vector2f(64.f, 0.f);
-    quad[2].texCoords = sf::Vector2f(64.f, 32.f);
-    quad[3].texCoords = sf::Vector2f(32.f, 32.f);
-
-    // ===============================================
-
-    quad2[0].position = sf::Vector2f(32.f, 0.f);
-    quad2[1].position = sf::Vector2f(64.f, 0.f);
-    quad2[2].position = sf::Vector2f(64.f, 32.f);
-    quad2[3].position = sf::Vector2f(32.f, 32.f);
-
-    quad2[0].texCoords = sf::Vector2f(64.f, 0.f);
-    quad2[1].texCoords = sf::Vector2f(96.f, 0.f);
-    quad2[2].texCoords = sf::Vector2f(96.f, 32.f);
-    quad2[3].texCoords = sf::Vector2f(64.f, 32.f);
-
-
-
-
-    if (!grass_texture.loadFromFile("assets/tilemap-32px-128px.png")) {
-        std::cout << "error lading file" << std::endl;
-    }
 
     if (!wizard_texture.loadFromFile("assets/wizard-32px.png")) {
         std::cout << "error loading file" << std::endl;
+    }
+    if (!map.load("assets/tilemap-32px-256px.png", sf::Vector2u(32, 32), level, 16, 8))
+    {
+        std::cout << "error loading level" << std::endl;
+        return -1;
     }
     wizard_sprite.setTexture(wizard_texture);
 //    wizard_sprite.setScale(2.f, 2.f);
@@ -62,10 +48,8 @@ int main() {
         window.clear(sf::Color::Black);
 
         // draw everything here
+        window.draw(map);
         window.draw(wizard_sprite);
-
-        window.draw(quad, &grass_texture);
-        window.draw(quad2, &grass_texture);
 
         // end the current frame
         window.display();

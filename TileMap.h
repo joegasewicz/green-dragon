@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 #ifndef GREEN_DRAGON_TILEMAP_H
 #define GREEN_DRAGON_TILEMAP_H
@@ -14,8 +15,14 @@ public:
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
+        // apply transforms
         states.transform *= getTransform();
 
+        // apply the tileset texture
+        states.texture = &m_tileset;
+
+        // draw the vertex array
+        target.draw(m_vertices, states);
     }
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
