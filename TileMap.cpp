@@ -13,4 +13,6 @@ bool TileMap::load(
         unsigned int height
 ) {
     // TODO
+
+    return true;
 };
