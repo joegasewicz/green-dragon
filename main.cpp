@@ -10,15 +10,15 @@ int main() {
     sf::VertexArray quad(sf::Quads, 4);
 
 
-    quad[0].position = sf::Vector2f(10.f, 10.f);
-    quad[1].position = sf::Vector2f(110.f, 10.f);
-    quad[2].position = sf::Vector2f(110.f, 110.f);
-    quad[3].position = sf::Vector2f(10.f, 110.f);
+    quad[0].position = sf::Vector2f(0.f, 0.f);
+    quad[1].position = sf::Vector2f(128.f, 0.f);
+    quad[2].position = sf::Vector2f(128.f, 128.f);
+    quad[3].position = sf::Vector2f(0.f, 128.f);
 
     quad[0].texCoords = sf::Vector2f(0.f, 0.f);
-    quad[1].texCoords = sf::Vector2f(25.f, 0.f);
-    quad[2].texCoords = sf::Vector2f(25.f, 50.f);
-    quad[3].texCoords = sf::Vector2f(0.f, 50.f);
+    quad[1].texCoords = sf::Vector2f(128.f, 0.f);
+    quad[2].texCoords = sf::Vector2f(128.f, 128.f);
+    quad[3].texCoords = sf::Vector2f(0.f, 128.f);
 
     if (!grass_texture.loadFromFile("assets/grass-tile-128px.png")) {
         std::cout << "error lading file" << std::endl;
