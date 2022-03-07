@@ -11,5 +11,5 @@ find_package(SFML 2.5.1 COMPONENTS system window graphics network audio REQUIRED
 include_directories(${SFML_INCLUDE_DIRS})
 
 # Build targets
-add_executable(green_dragon main.cpp TileMap.cpp TileMap.h)
+add_executable(green_dragon main.cpp TileMap.cpp TileMap.h Hero.cpp Hero.h)
 target_link_libraries(green_dragon sfml-system sfml-window sfml-graphics sfml-network sfml-audio)
