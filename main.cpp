@@ -31,7 +31,7 @@ int main() {
     }
 
     window.create(sf::VideoMode(screen_width, screen_height), "Green Dragon");
-    window.setSize(sf::Vector2u(screen_width*4, screen_height*4));
+    window.setSize(sf::Vector2u(screen_width*2, screen_height*2));
 
     while (window.isOpen()) {
         sf::Event event{};
