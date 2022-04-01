@@ -8,6 +8,7 @@ int main() {
     int screen_width = 512;
     int screen_height = 256;
     sf::RenderWindow window;
+    sf::Clock timer;
     TileMap map;
     Hero hero = Hero{"Thor"};
 
@@ -31,7 +32,7 @@ int main() {
     }
 
     window.create(sf::VideoMode(screen_width, screen_height), "Green Dragon");
-    window.setSize(sf::Vector2u(screen_width*2, screen_height*2));
+    window.setSize(sf::Vector2u(screen_width*3, screen_height*3));
 
     while (window.isOpen()) {
         sf::Event event{};
@@ -41,13 +42,12 @@ int main() {
         }
         // clear the window with black color
         window.clear(sf::Color::Black);
+        // controls events
+        hero.update(event, &window, timer);
 
         // draw everything here
         window.draw(map);
         window.draw(hero.sprite);
-
-        // controls events
-        hero.input_listener(event);
 
         // end the current frame
         window.display();

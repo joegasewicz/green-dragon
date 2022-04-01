@@ -8,8 +8,9 @@
 #include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
-#define SPRITE_SPEED 1
+#define SPRITE_SPEED 2
 
 using namespace std;
 
@@ -24,7 +25,7 @@ public:
 
     explicit Hero(string name);
 
-    void input_listener(sf::Event event);
+    void update(sf::Event event, sf::RenderWindow *window, sf::Clock timer);
 
 private:
     string _name;
