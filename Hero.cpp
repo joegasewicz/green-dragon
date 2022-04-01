@@ -5,14 +5,12 @@
 #include "Hero.h"
 
 
-Hero::Hero(string name)
-{
+Hero::Hero(string name) {
     _name = name;
     curr_x_pos = 30.f;
     curr_y_pos = 30.f;
 
-    if (!texture.loadFromFile("assets/wizard-32px.png"))
-    {
+    if (!texture.loadFromFile("assets/wizard-32px.png")) {
         cout << "error loading file" << endl;
     }
 
@@ -20,27 +18,25 @@ Hero::Hero(string name)
     sprite.setPosition(curr_x_pos, curr_y_pos);
 };
 
-void Hero::input_listener(sf::Event event)
-{
-
-    bool upFlag = false;
-    bool downFlag = false;
-    bool leftFlag = false;
-    bool rightFlag = false;
-
-    switch (event.key.code)
+void Hero::update(sf::Event event, sf::RenderWindow *window, sf::Clock timer) {
+    double delta_time = timer.getElapsedTime().asSeconds();
+    float delta = timer.restart().asSeconds();
+    float speed = 5.f;
+    if (sf::Keyboard::Up == event.key.code)
     {
-        case sf::Keyboard::Up :     upFlag = true; break;
-        case sf::Keyboard::Down:    downFlag = true; break;
-        case sf::Keyboard::Left:    leftFlag = true; break;
-        case sf::Keyboard::Right:   rightFlag = true; break;
-        default : break;
+        sprite.move(0.f, -speed);
+    }
+    if (sf::Keyboard::Down == event.key.code)
+    {
+        sprite.move(0.f, speed);
+    }
+    if (sf::Keyboard::Left == event.key.code)
+    {
+        sprite.move(-speed, 0.f);
+    }
+    if (sf::Keyboard::Right == event.key.code)
+    {
+        sprite.move(speed, 0.f);
     }
 
-    if (leftFlag) curr_x_pos -= SPRITE_SPEED;
-    if (rightFlag) curr_x_pos += SPRITE_SPEED;
-    if (upFlag) curr_y_pos -= SPRITE_SPEED;
-    if (downFlag) curr_y_pos += SPRITE_SPEED;
-
-    sprite.setPosition(curr_x_pos, curr_y_pos);
 };
