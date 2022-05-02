@@ -26,8 +26,6 @@ public:
 
     void update(sf::Event event, sf::RenderWindow *window, sf::Clock timer);
 
-    void set_current_position(float x, float y);
-
 private:
     string _name;
 };

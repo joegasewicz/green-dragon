@@ -5,8 +5,7 @@
 #include "Hero.h"
 
 
-Hero::Hero(string name)
-{
+Hero::Hero(string name) {
     _name = name;
     curr_x_pos = 200.f;
     curr_y_pos = 200.f;
