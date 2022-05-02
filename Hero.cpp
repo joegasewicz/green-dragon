@@ -5,10 +5,11 @@
 #include "Hero.h"
 
 
-Hero::Hero(string name) {
+Hero::Hero(string name)
+{
     _name = name;
-    curr_x_pos = 30.f;
-    curr_y_pos = 30.f;
+    curr_x_pos = 200.f;
+    curr_y_pos = 200.f;
 
     if (!texture.loadFromFile("assets/hero-tiles.png"))
     {
@@ -20,6 +21,7 @@ Hero::Hero(string name) {
     sprite.setTextureRect(sf::IntRect(0,0, 32, 32));
 };
 
+// TODO remove window & timer args
 void Hero::update(sf::Event event, sf::RenderWindow *window, sf::Clock timer) {
     float speed = 5.f;
     if (sf::Keyboard::Up == event.key.code)

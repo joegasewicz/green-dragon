@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "TileMap.h"
 #include "Hero.h"
+#include "world.h"
 
 
 int main() {
@@ -9,8 +10,12 @@ int main() {
     int screen_height = 256;
     sf::RenderWindow window;
     sf::Clock timer;
+    sf::View view_one;
+
     TileMap map;
     Hero hero = Hero{"Thor"};
+    World world = World{&view_one, screen_width, screen_height};
+
 
     const int level[] =
     {
@@ -33,19 +38,29 @@ int main() {
 
     window.create(sf::VideoMode(screen_width, screen_height), "Green Dragon");
     window.setSize(sf::Vector2u(screen_width*3, screen_height*3));
+    // Setup view
+//    view_one.setViewport(sf::FloatRect(0.25f, 0.25f, 0.5f, 0.5f));
+//    window.setView(view_one);
 
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+            }
         }
-        // clear the window with black color
+        // Clear window
         window.clear(sf::Color::Black);
-        // controls events
+
+        // Hero
         hero.update(event, &window, timer);
 
-        // draw everything here
+        // View
+        sf::View *current_view = world.update_view(event);
+        window.setView(*current_view);
+
+        // Draw to window
         window.draw(map);
         window.draw(hero.sprite);
 

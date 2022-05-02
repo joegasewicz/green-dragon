@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include <math.h>
 
 #define SPRITE_SPEED 2
 
@@ -26,6 +25,8 @@ public:
     explicit Hero(string name);
 
     void update(sf::Event event, sf::RenderWindow *window, sf::Clock timer);
+
+    void set_current_position(float x, float y);
 
 private:
     string _name;
