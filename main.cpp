@@ -4,6 +4,9 @@
 #include "Hero.h"
 #include "world.h"
 
+#define WORLD_ROW_TOTAL 9
+#define WORLD_COLUMN_TOTAL 16
+
 const int screen_width = 512;
 const int screen_height = 256;
 
@@ -12,10 +15,11 @@ int main() {
     sf::Clock timer;
     sf::View view_one;
     TileMap map;
-    Hero hero = Hero{"Thor"};
+    Hero hero = Hero{"Thor", screen_width, screen_height};
     World world = World{&view_one, screen_width, screen_height};
     const int level[] =
     {
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       1, 1, 1, 1, 1, 5, 5, 5, 1, 1, 1, 1,1, 1, 1, 1,
       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -26,7 +30,8 @@ int main() {
       3, 3, 3, 3, 3, 7, 6, 3, 3, 3, 3, 3, 3, 3, 3, 3,
     };
     // Tile maps
-    if (!map.load("assets/tilemap-32px-256px.png", sf::Vector2u(32, 32), level, 16, 8))
+    if (!map.load("assets/tilemap-32px-256px.png",
+                  sf::Vector2u(32, 32), level, WORLD_COLUMN_TOTAL, WORLD_ROW_TOTAL))
     {
         std::cout << "error loading level" << std::endl;
         return -1;
