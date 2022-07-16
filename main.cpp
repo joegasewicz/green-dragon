@@ -3,9 +3,11 @@
 #include "TileMap.h"
 #include "Hero.h"
 #include "world.h"
+#include "Levels.h"
 
 #define WORLD_ROW_TOTAL 9
 #define WORLD_COLUMN_TOTAL 16
+
 
 const int screen_width = 512;
 const int screen_height = 256;
@@ -17,28 +19,19 @@ int main() {
     TileMap map;
     Hero hero = Hero{"Thor", screen_width, screen_height};
     World world = World{&view_one, screen_width, screen_height};
-    const int level[] =
-    {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      1, 1, 1, 1, 1, 5, 5, 5, 1, 1, 1, 1,1, 1, 1, 1,
-      2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-      3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-      3, 3, 3, 3, 3, 7, 6, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-    };
+    // Level tile maps
+    int level_one[TILE_ARRAY_SIZE] = {};
+    get_level_one_tiles(level_one, level_one_tiles);
     // Tile maps
     if (!map.load("assets/tilemap-32px-256px.png",
-                  sf::Vector2u(32, 32), level, WORLD_COLUMN_TOTAL, WORLD_ROW_TOTAL))
+                  sf::Vector2u(32, 32), level_one, WORLD_COLUMN_TOTAL, WORLD_ROW_TOTAL))
     {
         std::cout << "error loading level" << std::endl;
         return -1;
     }
     // Window
     window.create(sf::VideoMode(screen_width, screen_height), "Green Dragon");
-    window.setSize(sf::Vector2u(screen_width*3, screen_height*3));
+    window.setSize(sf::Vector2u(screen_width*5, screen_height*5));
     // Game loop
     while (window.isOpen())
     {
