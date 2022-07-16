@@ -21,10 +21,17 @@ public:
     sf::Sprite sprite;
     float curr_x_pos;
     float curr_y_pos;
+    int rect_width;
+    int rect_height;
+    int window_width;
+    int window_height;
 
-    explicit Hero(string name);
+    explicit Hero(string name, int window_width, int window_height);
 
     void update(sf::Event event, sf::RenderWindow *window, sf::Clock timer);
+
+    float get_x_position() const;
+    float get_y_position() const;
 
 private:
     string _name;
