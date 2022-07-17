@@ -4,23 +4,41 @@
 
 #include "Levels.h"
 
-int level_one_tiles[TILE_ARRAY_SIZE]  =
+
+std::array<std::array<int, 128>, 2> level_one_screens[] =
 {
-        TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES,TILE_BUSHES,
-        TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES, TILE_BUSHES,
-        TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR_OLD, TILE_STONE_FLOOR_OLD, TILE_STONE_FLOOR_OLD, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR,TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR, TILE_STONE_FLOOR,
-        TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY, TILE_CLAY,
-        TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER,
-        TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER,
-        TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER,
-        TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER,
-        TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_SEA, TILE_SWAMP, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER, TILE_RIVER,
+{
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    },
+{
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    },
 };
 
-void get_level_one_tiles(int level_one[TILE_ARRAY_SIZE], const int tiles[TILE_ARRAY_SIZE])
+void merge_screen_into_level(int level[TILE_ARRAY_SIZE *2], std::array<std::array<int, 128>, 2> screens)
 {
-    for (int i = 0; i <= TILE_ARRAY_SIZE; i++)
+    int counter = 0;
+    for (int i = 0; i < 2; i++)
     {
-        level_one[i] = tiles[i];
+        for (int j = 0; j < 144; j++)
+        {
+            level[counter] = screens[i][j];
+            counter++;
+            std::cout << "counter: " << counter << std::endl;
+        }
     }
-};
+}

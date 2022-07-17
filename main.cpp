@@ -5,10 +5,6 @@
 #include "world.h"
 #include "Levels.h"
 
-#define WORLD_ROW_TOTAL 9
-#define WORLD_COLUMN_TOTAL 16
-
-
 const int screen_width = 512;
 const int screen_height = 256;
 
@@ -20,11 +16,12 @@ int main() {
     Hero hero = Hero{"Thor", screen_width, screen_height};
     World world = World{&view_one, screen_width, screen_height};
     // Level tile maps
-    int level_one[TILE_ARRAY_SIZE] = {};
-    get_level_one_tiles(level_one, level_one_tiles);
+    int level_one[TILE_ARRAY_SIZE*2] = {};
+//    get_level_tiles(level_one, level_one_tiles);
+    merge_screen_into_level(level_one, *level_one_screens);
     // Tile maps
     if (!map.load("assets/tilemap-32px-256px.png",
-                  sf::Vector2u(32, 32), level_one, WORLD_COLUMN_TOTAL, WORLD_ROW_TOTAL))
+                  sf::Vector2u(32, 32), level_one, WORLD_COLUMN_TOTAL, WORLD_ROW_TOTAL*2))
     {
         std::cout << "error loading level" << std::endl;
         return -1;
